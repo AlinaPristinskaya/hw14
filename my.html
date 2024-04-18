@@ -4,10 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Budgeting App</title>
+    <link rel="stylesheet" href="my.css">
 
 </head>
 <body>
     <h1>Welcome to the Simple Budgeting App</h1>
+   <div>
+        <h2>Incomes</h2>
+        <table class="js-incomes-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Amount</th>
+                    <th>Recurring</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <form class="form-addIncom" id="addIncom"> 
+            <label for="name">Name</label>
+            <input type="text" name="name">
+            <label for="amount">Amount</label>
+            <input type="text" name="amount">
+            <select name="recurring">
+                <option>recurring</option>
+                <option value="true">true</option>
+                <option value="false">false</option>
+                
+              </select>
+            <button type="submit">Add Incomes</button>
+    
+        </form>
+   </div>
+   <div>
+        <h2>Expenses</h2>
+        <table class="js-expenses-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Amount</th>
+                    <th>Recurring</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <form class="form-addExpens" id="addExpens"> 
+            <label for="name">Name</label>
+            <input type="text" name="name">
+            <label for="amount">Amount</label>
+            <input type="text" name="amount">
+            <select name="recurring">
+                <option>recurring</option>
+                <option value="true">true</option>
+                <option value="false">false</option>
+                
+              </select>
+            <button type="submit">Add Expenses</button>
+    
+        </form>
+   </div>
+   
     <script type="text/javascript" src="my.js"></script>
 </body>
 </html>

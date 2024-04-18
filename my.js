@@ -1,7 +1,17 @@
 
-        // Function to load or initialize data in session storage
+const refs = {
+    tableBodyIncomes: document.querySelector('.js-incomes-table > tbody'),
+    tableBodyExpenses: document.querySelector('.js-expenses-table > tbody'),
+    registerFormAddIncom: document.querySelector('.form-addIncom'),
+    registerFormAddExpens: document.querySelector('.form-addExpens')
+  };
+
+refs.registerFormAddIncom.addEventListener('submit', handleSubmit);
+refs.registerFormAddExpens.addEventListener('submit', handleSubmit);
+
+      // Function to load or initialize data in session storage
         function loadData() {
-            // Check if data is already in session storage, if not, initialize it
+            // Checking if the data is already in the session store, if not, initializing it.
             if (!sessionStorage.getItem('income')) {
                 const incomes = [
                     { name: 'Salary', amount: 4000, recurring: true },
@@ -21,21 +31,9 @@
                 sessionStorage.setItem('income', JSON.stringify(incomes));
                 sessionStorage.setItem('expenses', JSON.stringify(expenses));
             }
+            updateResultsTable()
         }
-
-        // Function to add new entry
-        function addEntry(type) {
-            let name = prompt(`Enter the name of the ${type}:`);
-            let amount = parseFloat(prompt(`Enter the amount of the ${type}:`));
-            let recurring = confirm("Is this a recurring " + type + "?");
-
-            let newEntry = { name: name, amount: amount, recurring: recurring };
-            let entries = JSON.parse(sessionStorage.getItem(type));
-            entries.push(newEntry);
-            sessionStorage.setItem(type, JSON.stringify(entries));
-        }
-
-        // Function to calculate and display results
+// // Function to calculate and display results
         function displayResults() {
             let incomes = JSON.parse(sessionStorage.getItem('income'));
             let expenses = JSON.parse(sessionStorage.getItem('expenses'));
@@ -51,11 +49,54 @@
 
             alert(`Total Disposable Income left after savings: $${remaining}`);
         }
+        function updateResultsTable() {
+            let incomes = JSON.parse(sessionStorage.getItem('income'));
+            let expenses = JSON.parse(sessionStorage.getItem('expenses'));
+            let newIncomes=incomes.map(incom=>
+                `<tr><td>${incom.name}</td><td>${incom.amount}</td><td>${incom.recurring}</td></tr>`)
+            let newExrpenses=expenses.map(expens=>
+                `<tr><td>${expens.name}</td><td>${expens.amount}</td><td>${expens.recurring}</td></tr>`)
+            refs.tableBodyIncomes.insertAdjacentHTML('beforeend', newIncomes);        
+            refs.tableBodyExpenses.insertAdjacentHTML('beforeend', newExrpenses);
+            displayResults();
+          }
+        
 
-        // Execute functions on load
+          function handleSubmit(event) {
+  event.preventDefault();
+  const form = event.target;
+  
+  const name = form.elements.name.value;
+  const amount = form.elements.amount.value;
+  const recurring=form.elements.recurring.value
+  if (name === "" || amount === "" || recurring==="recurring") {
+    return alert('Please fill in all the fields!');
+  } 
+  let newNote = { name: name, amount: amount, recurring: recurring };
+  if(form.id==="addIncom"){
+    let incomes = JSON.parse(sessionStorage.getItem('income'));
+  incomes.push(newNote);
+  sessionStorage.setItem('income', JSON.stringify(incomes));
+  }else{
+    
+  let expenses = JSON.parse(sessionStorage.getItem('expenses'));
+  expenses.push(newNote);
+  sessionStorage.setItem('expenses', JSON.stringify(expenses)); 
+  }
+  
+    
+  form.reset();
+  location.reload();
+  
+
+}
+  
+
+  
+  // // Execute functions on load
         window.onload = function() {
             loadData();
-            addEntry('income');
-            addEntry('expenses');
-            displayResults();
+            // addEntry('income');
+            // addEntry('expenses');
+            
         }
