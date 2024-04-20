@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +8,17 @@
     <link rel="stylesheet" href="my.css">
 
 </head>
+
 <body>
     <h1>Welcome to the Simple Budgeting App</h1>
-   <div>
+    <div>
+        <h2 class="total-income"></h2>
+        <div>
+            <h3 class="remaining"></h3>
+            <h4 class="savind"></h4>
+            <label for="saving" class="modal-label">"How much of your disposable income would you like to put into savings?"</label>
+            <input type="number" min="1" name="saving" class="inputSavings modal-input" onchange="displayResults(this.value)">
+        </div>
         <h2>Incomes</h2>
         <table class="js-incomes-table">
             <thead>
@@ -21,22 +30,20 @@
             </thead>
             <tbody></tbody>
         </table>
-        <form class="form-addIncom" id="addIncom"> 
-            <label for="name">Name</label>
-            <input type="text" name="name">
-            <label for="amount">Amount</label>
-            <input type="text" name="amount">
-            <select name="recurring">
+        <form class="form-addIncom" id="addIncom">
+            <label for="name"class="modal-label">Name</label>
+            <input type="text" name="name" class="modal-input">
+            <label for="amount" class="modal-label">Amount</label>
+            <input type="number" min="1" name="amount" class="modal-input">
+            <select name="recurring" class="modal-input">
                 <option>recurring</option>
                 <option value="true">true</option>
                 <option value="false">false</option>
-                
-              </select>
+            </select>
             <button type="submit">Add Incomes</button>
-    
         </form>
-   </div>
-   <div>
+    </div>
+    <div>
         <h2>Expenses</h2>
         <table class="js-expenses-table">
             <thead>
@@ -48,23 +55,21 @@
             </thead>
             <tbody></tbody>
         </table>
-        <form class="form-addExpens" id="addExpens"> 
-            <label for="name">Name</label>
-            <input type="text" name="name">
-            <label for="amount">Amount</label>
-            <input type="text" name="amount">
-            <select name="recurring">
+        <form class="form-addExpens" id="addExpens">
+            <label for="name" class="modal-label">Name</label>
+            <input type="text" name="name" class="modal-input">
+            <label for="amount" class="modal-label">Amount</label>
+            <input type="number" min="1" name="amount" class="modal-input">
+            <select name="recurring" class="modal-input">
                 <option>recurring</option>
                 <option value="true">true</option>
                 <option value="false">false</option>
-                
-              </select>
+            </select>
             <button type="submit">Add Expenses</button>
-    
         </form>
-   </div>
-   
+    </div>
+
     <script type="text/javascript" src="my.js"></script>
 </body>
-</html>
 
+</html>
